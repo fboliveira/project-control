@@ -2,6 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get('/projets')
+@router.get('/projects')
 def get_all_projects():
     return {"projects" : []}
