@@ -12,6 +12,6 @@ SQLModel.metadata.create_all(engine)
 
 SessionLocal = Session(bind=engine, autoflush=False, expire_on_commit=False)
 
-def get_connection() -> Generator[Session, None, None]:
+def get_db_session() -> Generator[Session, None, None]:
     with SessionLocal() as session:
         yield session
