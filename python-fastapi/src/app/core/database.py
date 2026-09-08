@@ -5,10 +5,6 @@ from sqlmodel import Session, SQLModel, create_engine
 from config import Config
 
 config = Config()
-
-class Base(SQLModel, table=True):
-    pass
-
 engine = create_engine(config.DATABASE_URL, pool_pre_ping=True)
 
 # Create the Tables
