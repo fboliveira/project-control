@@ -1,7 +1,7 @@
 import uvicorn
 
 from fastapi import FastAPI
-from app.project import routes
+from app.projects import routes
 
 from app.core.config import Config
 
