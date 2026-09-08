@@ -1,4 +1,4 @@
-from core.model import ModelBase
+from app.core.model import ModelBase
 
 class Project(ModelBase):
     __tablename__ = "tb_projects"
