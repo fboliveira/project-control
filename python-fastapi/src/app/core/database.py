@@ -10,8 +10,10 @@ engine = create_engine(config.DATABASE_URL, pool_pre_ping=True)
 # Create the Tables
 SQLModel.metadata.create_all(engine)
 
-SessionLocal = Session(bind=engine, autoflush=False, expire_on_commit=False)
-
 def get_db_session() -> Generator[Session, None, None]:
-    with SessionLocal() as session:
-        yield session
+    """Creates a database session per request and closes it after."""
+    db = Session(engine)
+    try:
+        yield db  # Hand over the session to whatever needs it
+    finally:
+        db.close()  # Guaranteed to run after the API request finishes
