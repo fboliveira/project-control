@@ -11,3 +11,6 @@ class CreateProject(SQLModel):
 class UpdateProject(SQLModel):
     id: int
     name: str
+
+class DeleteProject(SQLModel):
+    id: int
