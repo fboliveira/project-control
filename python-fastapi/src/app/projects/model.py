@@ -7,3 +7,7 @@ class Project(ModelBase, table=True):
 
 class CreateProject(SQLModel):
     name: str
+
+class UpdateProject(SQLModel):
+    id: int
+    name: str

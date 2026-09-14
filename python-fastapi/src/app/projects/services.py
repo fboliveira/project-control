@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated
 
 from fastapi import Depends
@@ -5,7 +6,7 @@ from sqlmodel import Session, select
 
 from app.core.database import get_db_session
 
-from app.projects.model import CreateProject, Project
+from app.projects.model import CreateProject, Project, UpdateProject
 
 SessionDep = Annotated[Session, Depends(get_db_session)]
 
@@ -27,4 +28,22 @@ class ProjectService:
 
         self.session.refresh(project)
 
+        return project
+
+    def update_project(self, update_project : UpdateProject) -> Project:
+
+        statement = select(Project).where(Project.id == update_project.id)
+        results = self.session.exec(statement)
+
+        project = results.one()
+
+        print("Original project: ", project)
+
+        project.name = update_project.name
+        project.updated_at = datetime.now()
+        
+        self.session.commit()
+        self.session.refresh(project)
+
+        print("Project after update: ", project)
         return project
